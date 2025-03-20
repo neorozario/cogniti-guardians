@@ -1,69 +1,89 @@
-# Welcome to your Lovable project
+# CognitiGuardians 🚀
 
-## Project info
+### **AI-Powered Smart Factory Security & Monitoring System**
 
-**URL**: https://lovable.dev/projects/25c6c7bc-3228-4287-b666-3eae8262aabe
+CognitiGuardians is a cutting-edge **AI-driven security and monitoring solution** designed to protect smart factories from **cyber threats, machine failures, and operational anomalies**. It integrates **IoT, AI, and real-time analytics** to ensure **maximum uptime and security** for industrial environments.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🔥 **Features**
 
-**Use Lovable**
+✅ **Real-Time Machine Monitoring** – Live tracking of machine health and operational status.  
+✅ **AI-Powered Anomaly Detection** – Detects unusual patterns before failures occur.  
+✅ **Cybersecurity Threat Prevention** – Identifies unauthorized access and potential attacks.  
+✅ **Intuitive Dashboard (Streamlit)** – Easy-to-use UI for real-time insights.  
+✅ **Automated Alerts & Reports** – Notifies factory operators instantly in case of issues.  
+✅ **Scalable & Cost-Effective** – Designed for small and large-scale industrial plants.  
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/25c6c7bc-3228-4287-b666-3eae8262aabe) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ **Technology Stack**
 
-**Use your preferred IDE**
+### **Backend:**
+- **FastAPI** – High-performance backend for handling security alerts.
+- **PostgreSQL** – Secure storage for machine logs and anomaly reports.
+- **MQTT (paho-mqtt)** – Real-time IoT communication with factory machines.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### **AI & Machine Learning:**
+- **TensorFlow / PyTorch** – AI-driven anomaly detection.
+- **LSTM Autoencoders** – Predictive modeling for machine failures.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### **Frontend:**
+- **Streamlit** – Interactive dashboard for real-time insights.
+- **Plotly & Matplotlib** – Dynamic visualizations and analytics.
 
-Follow these steps:
+### **Deployment:**
+- **Docker** – Containerized setup for easy scalability.
+- **Firebase** – Free-tier cloud storage for logs and notifications.
 
+---
+
+## 📦 **Installation & Setup**
+
+### **1️⃣ Clone the Repository**
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+$ git clone https://github.com/neorozario/cogniti-guardians.git
+$ cd cogniti-guardians
 ```
 
-**Edit a file directly in GitHub**
+### **2️⃣ Install Dependencies**
+```sh
+$ pip install -r requirements.txt
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### **3️⃣ Run the Application**
+```sh
+$ python main.py
+```
 
-**Use GitHub Codespaces**
+### **4️⃣ Access the Dashboard**
+Visit `http://localhost:8501` in your browser to monitor your factory in real time! 🌍
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 🚀 **How It Works**
 
-This project is built with .
+1️⃣ **IoT sensors** send real-time machine data via MQTT.  
+2️⃣ **AI model** analyzes the data and detects anomalies.  
+3️⃣ **FastAPI backend** processes alerts and logs events.  
+4️⃣ **Streamlit dashboard** displays security updates.  
+5️⃣ **Operators get notified** of potential failures & security risks.  
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## 🎯 **Future Enhancements**
 
-Simply open [Lovable](https://lovable.dev/projects/25c6c7bc-3228-4287-b666-3eae8262aabe) and click on Share -> Publish.
+🔹 Enhanced AI models for even better predictions.  
+🔹 More IoT protocol integrations (Modbus, OPC-UA).  
+🔹 Mobile app for real-time monitoring on the go.  
 
-## I want to use a custom domain - is that possible?
+---
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+## 📜 **License**
+
+This project is **open-source** under the **MIT License**. Feel free to modify and contribute! 🚀
+
+---
+
+### **📬 Contact**
+If you have any questions, feel free to reach out or open an issue. Happy coding! 😃
