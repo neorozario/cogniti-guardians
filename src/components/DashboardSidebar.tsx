@@ -4,12 +4,11 @@ import {
   Activity, 
   AlertTriangle, 
   Home, 
-  LayoutDashboard,
+  Thermometer,
   Settings, 
   Shield, 
-  Thermometer,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 const menuItems = [
@@ -17,12 +16,14 @@ const menuItems = [
   { icon: AlertTriangle, label: "Alerts", href: "/alerts" },
   { icon: Activity, label: "System Health", href: "/health" },
   { icon: Thermometer, label: "Machines", href: "/machines" },
+  { icon: Shield, label: "Security", href: "/security" },
   { icon: Settings, label: "Settings", href: "/settings" },
 ];
 
 const DashboardSidebar = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-
+  const location = useLocation();
+  
   return (
     <aside className="w-16 lg:w-64 h-screen flex flex-col bg-sidebar border-r border-border transition-all duration-300">
       <div className="p-4 flex items-center justify-center lg:justify-start border-b border-border h-[76px]">
@@ -35,7 +36,8 @@ const DashboardSidebar = () => {
       <nav className="p-2 flex-grow">
         <ul className="space-y-1">
           {menuItems.map((item) => {
-            const isActive = window.location.pathname === item.href;
+            const isActive = location.pathname === item.href || 
+              (item.href !== "/" && location.pathname.startsWith(item.href));
             const isHovered = hoveredItem === item.label;
             
             return (

@@ -9,8 +9,46 @@ import WaveChart from "@/components/WaveChart";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, ArrowUpRight, Download, ShieldCheck, Zap } from "lucide-react";
 import AlertItem from "@/components/AlertItem";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import { useState } from "react";
+import { 
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const Index = () => {
+  const [showEmergencyDialog, setShowEmergencyDialog] = useState(false);
+  const [scanningInProgress, setScanningInProgress] = useState(false);
+
+  const handleEmergencyShutdown = () => {
+    toast.success("Emergency shutdown initiated");
+    setShowEmergencyDialog(false);
+  };
+
+  const handleRunSecurityScan = () => {
+    setScanningInProgress(true);
+    toast.info("Security scan initiated");
+    
+    // Simulate a scan completing after 3 seconds
+    setTimeout(() => {
+      setScanningInProgress(false);
+      toast.success("Security scan completed. No threats detected.");
+    }, 3000);
+  };
+
+  const handleExportLogs = () => {
+    toast.success("Logs exported successfully");
+  };
+
+  const handleAcknowledgeAlert = () => {
+    toast.success("Alert acknowledged");
+  };
+
   return (
     <div className="flex h-screen bg-background text-foreground">
       <DashboardSidebar />
@@ -36,13 +74,15 @@ const Index = () => {
               </div>
               
               <div className="flex items-center gap-3">
-                <Button variant="outline" size="sm" className="gap-1">
+                <Button variant="outline" size="sm" className="gap-1" onClick={handleExportLogs}>
                   <Download className="h-4 w-4" />
                   Download Report
                 </Button>
-                <Button className="gap-1">
-                  <ShieldCheck className="h-4 w-4" />
-                  Security Dashboard
+                <Button className="gap-1" asChild>
+                  <Link to="/security">
+                    <ShieldCheck className="h-4 w-4" />
+                    Security Dashboard
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -91,8 +131,12 @@ const Index = () => {
                     Current anomaly score: 0.12/1.0
                   </p>
                 </div>
-                <Button variant="outline" size="sm">
-                  View Details
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  asChild
+                >
+                  <Link to="/health">View Details</Link>
                 </Button>
               </div>
               
@@ -122,6 +166,7 @@ const Index = () => {
                   message="Packaging System temperature exceeded threshold (52°C)"
                   timestamp="14 min ago"
                   severity="warning"
+                  onAcknowledge={handleAcknowledgeAlert}
                 />
                 
                 <AlertItem
@@ -133,8 +178,13 @@ const Index = () => {
                 />
                 
                 <div className="text-center mt-2">
-                  <Button variant="link" size="sm" className="text-xs">
-                    View All Alerts
+                  <Button 
+                    variant="link" 
+                    size="sm" 
+                    className="text-xs"
+                    asChild
+                  >
+                    <Link to="/alerts">View All Alerts</Link>
                   </Button>
                 </div>
               </div>
@@ -143,20 +193,41 @@ const Index = () => {
             {/* Machine Status */}
             <DashboardCard title="Machine Status" className="lg:col-span-2">
               <MachinesList />
+              <div className="mt-4 text-right">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  asChild
+                >
+                  <Link to="/machines">View All Machines</Link>
+                </Button>
+              </div>
             </DashboardCard>
             
             {/* Quick Actions */}
             <DashboardCard title="Quick Actions">
               <div className="space-y-2">
-                <Button className="w-full justify-start">
+                <Button 
+                  className="w-full justify-start"
+                  onClick={handleRunSecurityScan}
+                  disabled={scanningInProgress}
+                >
                   <ShieldCheck className="h-4 w-4 mr-2" />
-                  Run Security Scan
+                  {scanningInProgress ? "Scanning..." : "Run Security Scan"}
                 </Button>
-                <Button variant="outline" className="w-full justify-start">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={handleExportLogs}
+                >
                   <Download className="h-4 w-4 mr-2" />
                   Export Logs
                 </Button>
-                <Button variant="destructive" className="w-full justify-start">
+                <Button 
+                  variant="destructive" 
+                  className="w-full justify-start"
+                  onClick={() => setShowEmergencyDialog(true)}
+                >
                   <AlertTriangle className="h-4 w-4 mr-2" />
                   Emergency Shutdown
                 </Button>
@@ -165,6 +236,26 @@ const Index = () => {
           </section>
         </main>
       </div>
+      
+      <Dialog open={showEmergencyDialog} onOpenChange={setShowEmergencyDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm Emergency Shutdown</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to initiate an emergency shutdown?
+              This will immediately halt all machine operations.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowEmergencyDialog(false)}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={handleEmergencyShutdown}>
+              Confirm Shutdown
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
