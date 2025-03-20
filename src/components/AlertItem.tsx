@@ -13,6 +13,7 @@ interface AlertItemProps {
   severity: AlertSeverity;
   acknowledged?: boolean;
   className?: string;
+  onAcknowledge?: () => void;
 }
 
 const AlertItem = ({
@@ -22,6 +23,7 @@ const AlertItem = ({
   severity,
   acknowledged = false,
   className,
+  onAcknowledge,
 }: AlertItemProps) => {
   const severityMap = {
     critical: {
@@ -67,8 +69,8 @@ const AlertItem = ({
           <span>{severity.charAt(0).toUpperCase() + severity.slice(1)}</span>
         </div>
         
-        {!acknowledged && (
-          <Button variant="secondary" size="sm" className="h-7 text-xs">
+        {!acknowledged && onAcknowledge && (
+          <Button variant="secondary" size="sm" className="h-7 text-xs" onClick={onAcknowledge}>
             <CheckCircle2 className="h-3 w-3 mr-1" />
             Acknowledge
           </Button>
